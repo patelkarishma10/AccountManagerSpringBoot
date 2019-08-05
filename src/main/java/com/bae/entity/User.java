@@ -39,20 +39,20 @@ public class User {
 		this.id = id;
 	}
 
-	public String getFirstNname() {
+	public String getFirstname() {
 		return firstname;
 	}
 
-	public void setFirstNname(String firstNname) {
-		this.firstname = firstNname;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
-	public String getLastName() {
+	public String getLastname() {
 		return lastname;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastname = lastName;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
 	public String getPrize() {

@@ -11,4 +11,6 @@ public interface UserService {
 
 	Collection<User> getAllUsers();
 
+	Optional<User> createUser(User user);
+
 }

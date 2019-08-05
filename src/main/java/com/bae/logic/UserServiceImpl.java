@@ -31,4 +31,11 @@ public class UserServiceImpl implements UserService {
 		return newList;
 	}
 
+	@Override
+	public Optional<User> createUser(User user) {
+		repository.save(user);
+		Optional<User> userDetails = repository.findById(user.getId());
+		return userDetails;
+	}
+
 }
