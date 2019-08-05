@@ -33,10 +33,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Optional<User> createUser(User user) {
-		// user.setPrize("£10");
 		repository.save(user);
 		Optional<User> userDetails = repository.findById(user.getId());
-
 		return userDetails;
 	}
 
