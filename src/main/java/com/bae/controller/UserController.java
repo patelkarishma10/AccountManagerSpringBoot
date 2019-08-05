@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,8 +38,11 @@ public class UserController {
 
 	@PostMapping("/create")
 	public Optional<User> createUser(@RequestBody User user) {
-//		User retVal = service.createUser(user);
-//		return new ResponceEntity<>(retVal, HttpStatus.OK);
 		return service.createUser(user);
+	}
+
+	@DeleteMapping("/deleteOne/{id}")
+	public String deleteAUser(@PathVariable("id") Long id) {
+		return service.deleteAUser(id);
 	}
 }

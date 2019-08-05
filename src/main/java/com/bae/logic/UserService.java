@@ -9,6 +9,8 @@ public interface UserService {
 
 	Optional<User> getAUser(long id);
 
+	String deleteAUser(long id);
+
 	Collection<User> getAllUsers();
 
 	Optional<User> createUser(User user);
