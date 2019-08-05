@@ -1,6 +1,7 @@
 package com.bae.controller;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +24,7 @@ public class UserController {
 	public UserService service;
 
 	@GetMapping("/getOne/{id}")
-	public User getAUser(@PathVariable("id") Long id) {
+	public Optional<User> getAUser(@PathVariable("id") Long id) {
 		return service.getAUser(id);
 	}
 

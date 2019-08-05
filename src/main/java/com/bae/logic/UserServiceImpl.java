@@ -1,6 +1,7 @@
 package com.bae.logic;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,8 @@ public class UserServiceImpl implements UserService {
 	public UserRepository repository;
 
 	@Override
-	public User getAUser(long id) {
-		User user = repository.getOne(id);
+	public Optional<User> getAUser(long id) {
+		Optional<User> user = repository.findById(id);
 		return user;
 	}
 

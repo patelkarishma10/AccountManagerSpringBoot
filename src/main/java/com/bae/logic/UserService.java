@@ -1,12 +1,13 @@
 package com.bae.logic;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import com.bae.entity.User;
 
 public interface UserService {
 
-	User getAUser(long id);
+	Optional<User> getAUser(long id);
 
 	Collection<User> getAllUsers();
 
