@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -42,10 +44,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User createUser(User user) {
-		String accountNumber = restTemplate.getForObject("http://localhost:8089/user//getAccountNumber", String.class);
+		String accountNumber = restTemplate.getForObject("http://localhost:8089/user/getAccountNumber", String.class);
 		user.setAccountNumber(accountNumber);
-		user.setPrize("£50");
-
+		ResponseEntity<String> prize = restTemplate.exchange("http://localhost:8088/user/getPrize", HttpMethod.GET,
+				null, String.class);
+		user.setPrize(prize.getBody());
 		return repository.save(user);
 
 	}

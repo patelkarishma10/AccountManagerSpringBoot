@@ -12,11 +12,11 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@Column(length = 50, unique = true)
+	@Column(length = 50)
 	private String firstname;
 	@Column(length = 50)
 	private String lastname;
-	@Column(length = 5)
+	@Column(length = 30)
 	private String prize;
 	@Column(length = 11)
 	private String accountnumber;
