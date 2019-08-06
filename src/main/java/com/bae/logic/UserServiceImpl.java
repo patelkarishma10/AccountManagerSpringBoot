@@ -32,10 +32,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Optional<User> createUser(User user) {
-		repository.save(user);
-		Optional<User> userDetails = repository.findById(user.getId());
-		return userDetails;
+	public User createUser(User user) {
+		// Optional<User> userDetails = repository.findById(user.getId());
+		return repository.save(user);
+
 	}
 
 	@Override

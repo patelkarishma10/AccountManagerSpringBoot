@@ -37,7 +37,7 @@ public class UserController {
 	}
 
 	@PostMapping("/create")
-	public Optional<User> createUser(@RequestBody User user) {
+	public User createUser(@RequestBody User user) {
 		return service.createUser(user);
 	}
 

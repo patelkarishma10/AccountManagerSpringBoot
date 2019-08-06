@@ -13,6 +13,6 @@ public interface UserService {
 
 	Collection<User> getAllUsers();
 
-	Optional<User> createUser(User user);
+	User createUser(User user);
 
 }
