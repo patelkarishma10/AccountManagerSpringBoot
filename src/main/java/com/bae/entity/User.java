@@ -18,13 +18,16 @@ public class User {
 	private String lastname;
 	@Column(length = 5)
 	private String prize;
+	@Column(length = 11)
+	private String accountnumber;
 
-	public User(long id, String firstname, String lastname, String prize) {
+	public User(long id, String firstname, String lastname, String prize, String accountnumber) {
 		super();
 		this.id = id;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.prize = prize;
+		this.accountnumber = accountnumber;
 	}
 
 	public User() {
@@ -61,6 +64,14 @@ public class User {
 
 	public void setPrize(String prize) {
 		this.prize = prize;
+	}
+
+	public String getAccountNumber() {
+		return accountnumber;
+	}
+
+	public void setAccountNumber(String accountnumber) {
+		this.accountnumber = accountnumber;
 	}
 
 }

@@ -2,10 +2,10 @@ package com.bae.logic;
 
 import java.util.Collection;
 import java.util.Optional;
-import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.bae.entity.User;
 import com.bae.repository.UserRepository;
@@ -14,11 +14,19 @@ import com.bae.repository.UserRepository;
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	public UserServiceImpl(UserRepository repository) {
+	public UserServiceImpl(UserRepository repository, RestTemplate restTemplate) {
+
 		this.repository = repository;
+		this.restTemplate = restTemplate;
 	}
 
 	public UserRepository repository;
+
+	private RestTemplate restTemplate;
+
+	public UserServiceImpl() {
+
+	}
 
 	@Override
 	public Optional<User> getAUser(long id) {
@@ -34,18 +42,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User createUser(User user) {
-		// Optional<User> userDetails = repository.findById(user.getId());
-		Random random = new Random();
-		int numgen = random.nextInt(3);
-		if (numgen == 1) {
-			user.setPrize("£0");
-
-		} else if (numgen == 2) {
-			user.setPrize("£50");
-
-		} else {
-			user.setPrize("£100");
-		}
+		String accountNumber = restTemplate.getForObject("http://localhost:8089/user//getAccountNumber", String.class);
+		user.setAccountNumber(accountNumber);
+		user.setPrize("£50");
 
 		return repository.save(user);
 
