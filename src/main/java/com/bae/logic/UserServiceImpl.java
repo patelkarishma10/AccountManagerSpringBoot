@@ -37,15 +37,14 @@ public class UserServiceImpl implements UserService {
 		// Optional<User> userDetails = repository.findById(user.getId());
 		Random random = new Random();
 		int numgen = random.nextInt(3);
-		if (numgen == 0) {
-			int num = random.nextInt(100000) + 1000000;
+		if (numgen == 1) {
+			user.setPrize("£0");
+
+		} else if (numgen == 2) {
 			user.setPrize("£50");
-		} else if (numgen == 1) {
-			int num = random.nextInt(1000000) + 10000000;
-			user.setPrize("£500");
+
 		} else {
-			int num = random.nextInt(10000000) + 100000000;
-			user.setPrize("£5000");
+			user.setPrize("£100");
 		}
 
 		return repository.save(user);
