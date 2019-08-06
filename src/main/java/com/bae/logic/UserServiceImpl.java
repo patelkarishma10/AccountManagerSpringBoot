@@ -2,6 +2,7 @@ package com.bae.logic;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,19 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User createUser(User user) {
 		// Optional<User> userDetails = repository.findById(user.getId());
+		Random random = new Random();
+		int numgen = random.nextInt(3);
+		if (numgen == 0) {
+			int num = random.nextInt(100000) + 1000000;
+			user.setPrize("£50");
+		} else if (numgen == 1) {
+			int num = random.nextInt(1000000) + 10000000;
+			user.setPrize("£500");
+		} else {
+			int num = random.nextInt(10000000) + 100000000;
+			user.setPrize("£5000");
+		}
+
 		return repository.save(user);
 
 	}
