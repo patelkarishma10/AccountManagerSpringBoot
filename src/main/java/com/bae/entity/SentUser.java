@@ -21,6 +21,7 @@ public class SentUser {
 		this.firstname = user.getFirstname();
 		this.lastname = user.getLastname();
 		this.accountnumber = user.getAccountNumber();
+		this.prize = user.getPrize();
 	}
 
 	public long getId() {
