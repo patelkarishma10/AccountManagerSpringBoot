@@ -6,9 +6,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.bae.entity.SentUser;
 import com.bae.entity.User;
 import com.bae.repository.UserRepository;
 
@@ -16,15 +18,18 @@ import com.bae.repository.UserRepository;
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	public UserServiceImpl(UserRepository repository, RestTemplate restTemplate) {
+	public UserServiceImpl(UserRepository repository, RestTemplate restTemplate, JmsTemplate jmsTemplate) {
 
 		this.repository = repository;
 		this.restTemplate = restTemplate;
+		this.jmsTemplate = jmsTemplate;
 	}
 
 	public UserRepository repository;
 
 	private RestTemplate restTemplate;
+
+	private JmsTemplate jmsTemplate;
 
 	public UserServiceImpl() {
 
@@ -51,6 +56,8 @@ public class UserServiceImpl implements UserService {
 		ResponseEntity<String> prize = restTemplate.exchange(
 				"http://localhost:8088/user/getPrize/" + accountNumberToSend, HttpMethod.GET, null, String.class);
 		user.setPrize(prize.getBody());
+
+		sendToQueue(user);
 		return repository.save(user);
 
 	}
@@ -59,6 +66,11 @@ public class UserServiceImpl implements UserService {
 	public String deleteAUser(long id) {
 		repository.deleteById(id);
 		return "{\"message\": \"user has been successfully deleted\"}";
+	}
+
+	private void sendToQueue(User user) {
+		SentUser accountToStore = new SentUser(user);
+		jmsTemplate.convertAndSend("AccountQueue", accountToStore);
 	}
 
 }
