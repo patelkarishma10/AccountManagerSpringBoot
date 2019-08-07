@@ -46,8 +46,10 @@ public class UserServiceImpl implements UserService {
 	public User createUser(User user) {
 		String accountNumber = restTemplate.getForObject("http://localhost:8089/user/getAccountNumber", String.class);
 		user.setAccountNumber(accountNumber);
-		ResponseEntity<String> prize = restTemplate.exchange("http://localhost:8088/user/getPrize", HttpMethod.GET,
-				null, String.class);
+
+		String accountNumberToSend = accountNumber;
+		ResponseEntity<String> prize = restTemplate.exchange(
+				"http://localhost:8088/user/getPrize/" + accountNumberToSend, HttpMethod.GET, null, String.class);
 		user.setPrize(prize.getBody());
 		return repository.save(user);
 
