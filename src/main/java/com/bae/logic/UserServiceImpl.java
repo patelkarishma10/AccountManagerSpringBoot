@@ -49,12 +49,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User createUser(User user) {
-		String accountNumber = restTemplate.getForObject("http://localhost:8089/user/getAccountNumber", String.class);
+		String accountNumber = restTemplate.getForObject("http://numgen:8089/user/getAccountNumber", String.class);
 		user.setAccountNumber(accountNumber);
 
 		String accountNumberToSend = accountNumber;
 		ResponseEntity<String> prize = restTemplate.exchange(
-				"http://localhost:8088/user/getPrize/" + accountNumberToSend, HttpMethod.GET, null, String.class);
+				"http://prizegen:8088/user/getPrize/" + accountNumberToSend, HttpMethod.GET, null, String.class);
 		user.setPrize(prize.getBody());
 
 		sendToQueue(user);
